@@ -101,16 +101,83 @@
 }
 
 .nav-link:hover{
-  color: #e3f39c;
+  color: #ffffff;
 }
+
+.navbar-toggler-icon{
+  color: #712cf9;
+}
+
+  /*Efeito da imagem link*/
+  img.media-object{
+    transition: all 0.5s;
+    cursor: pointer;
+  }
+
+img.media-object:hover{
+    -webkit-filter: drop-shadow(20px 15px 10px rgba(0,0,0,.5));
+    filter: drop-shadow(15px 10px 5px rgba(0,0,0,.5));
+}
+
+
+/* Adiciona estilos para o tema escuro */
+.dark-theme {
+  background-color: #333;
+  color: #fff;
+  /* Adiciona outros estilos escuros conforme necessário */
+}
+#themeToggleContainer {
+    position: fixed;
+    bottom: 50px; /* Ajusta distância do fundo conforme necessário */
+    right: 20px; /* Ajusta distância da direita conforme necessário */
+    z-index: 1000; /* Certifica de que está acima de outros elementos */
+  }
+
   </style>
-
-
-  <!-- Custom styles for this template -->
   <link href="product.css" rel="stylesheet">
 </head>
 
 <body>
+
+  <div id="themeToggleContainer">
+    <button id="themeToggle" class="btn btn-bd-primary py-2">
+      <svg class="bi my-1 theme-icon-active" width="1em" height="1em">
+        <use href="#sun-fill"></use>
+      </svg>
+      <span class="visually-hidden" id="bd-theme-text">Toggle theme</span>
+    </button>
+  </div>
+
+  
+  <script>
+    const themeToggle = document.getElementById('themeToggle');
+    const body = document.body;
+  
+    themeToggle.addEventListener('click', () => {
+      // Adiciona ou remove uma classe para alternar o tema
+      body.classList.toggle('dark-theme');
+      
+      // Pode salvar o estado do tema no armazenamento local para persistência
+      const isDarkTheme = body.classList.contains('dark-theme');
+      localStorage.setItem('dark-theme', isDarkTheme);
+    });
+  
+    // Restaura o tema ao carregar a página
+    const savedTheme = localStorage.getItem('dark-theme');
+    if (savedTheme === 'true') {
+      body.classList.add('dark-theme');
+    }
+  </script>
+
+
+
+
+
+
+
+
+
+
   <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
     <symbol id="check2" viewBox="0 0 16 16">
       <path
@@ -131,53 +198,7 @@
     </symbol>
   </svg>
 
-  <div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
-    <button class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center" id="bd-theme" type="button"
-      aria-expanded="false" data-bs-toggle="dropdown" aria-label="Toggle theme (auto)">
-      <svg class="bi my-1 theme-icon-active" width="1em" height="1em">
-        <use href="#circle-half"></use>
-      </svg>
-      <span class="visually-hidden" id="bd-theme-text">Toggle theme</span>
-    </button>
-    <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bd-theme-text">
-      <li>
-        <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light"
-          aria-pressed="false">
-          <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em">
-            <use href="#sun-fill"></use>
-          </svg>
-          Light
-          <svg class="bi ms-auto d-none" width="1em" height="1em">
-            <use href="#check2"></use>
-          </svg>
-        </button>
-      </li>
-      <li>
-        <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark"
-          aria-pressed="false">
-          <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em">
-            <use href="#moon-stars-fill"></use>
-          </svg>
-          Dark
-          <svg class="bi ms-auto d-none" width="1em" height="1em">
-            <use href="#check2"></use>
-          </svg>
-        </button>
-      </li>
-      <li>
-        <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto"
-          aria-pressed="true">
-          <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em">
-            <use href="#circle-half"></use>
-          </svg>
-          Auto
-          <svg class="bi ms-auto d-none" width="1em" height="1em">
-            <use href="#check2"></use>
-          </svg>
-        </button>
-      </li>
-    </ul>
-  </div>
+
 
 
   <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
@@ -198,9 +219,14 @@
   <nav class="navbar navbar-expand-md bg-dark sticky-top border-bottom" data-bs-theme="dark">
     <div class="container">
       <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvas"
-        aria-controls="offcanvas" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+      aria-controls="offcanvas" aria-label="Toggle navigation">
+      <img src="sanduiche.png" alt="Toggle navigation" style="width: 24px; height: 24px;">
+    </button>
+    
+    
+    
+    
+    
       <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvas" aria-labelledby="offcanvasLabel">
         <div class="offcanvas-header">
           <h5 class="offcanvas-title" id="offcanvasLabel"></h5>
@@ -212,9 +238,10 @@
             <li class="nav-item"><a class="nav-link" href="#">Cursos</a></li>
             <li class="nav-item"><a class="nav-link" href="#">Agendamentos</a></li>
             <li class="nav-item"><a class="nav-link" href="#">Serviços</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Quem Somos?</a></li>
             <li class="nav-item"><a class="nav-link" href="#">Redes</a></li>
             <li class="nav-item"><a class="nav-link" href="#">Localização</a></li>
+            <li class="nav-item"><a class="nav-link" href="#"><img src="logo_claudia.png" alt="Logo da empresa Jocelino Medeiros Barbearia" width="63" height="47"></a></li>
+
           </ul>
         </div>
       </div>
@@ -273,6 +300,25 @@
       </button>
     </div>
 <!--FIM Carrossel-->
+
+
+
+<div class="container col-xxl-8 px-4 py-5">
+  <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+    <div class="col-10 col-sm-8 col-lg-6">
+      <img src="bootstrap-themes.png" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+    </div>
+    <div class="col-lg-6">
+      <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Responsive left-aligned hero with image</h1>
+      <p class="lead">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.</p>
+      <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+        <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Primary</button>
+        <button type="button" class="btn btn-outline-secondary btn-lg px-4">Default</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 
 
@@ -370,12 +416,13 @@
 
 <div class="b-example-divider"></div>
 
+
 <div class="container px-4 py-5" id="hanging-icons">
-  <h2 class="pb-2 border-bottom">Hanging icons</h2>
+  <h2 class="pb-2 border-bottom">Nossas redes</h2>
   <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
     <div class="col d-flex align-items-start">
       <div class="icon-square text-body-emphasis bg-body-secondary d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
-        <svg class="bi" width="1em" height="1em"><use xlink:href="#toggles2"/></svg>
+        <img src="instagram.png" alt="Ícone Personalizado" width="48" height="48">
       </div>
       <div>
         <h3 class="fs-2 text-body-emphasis">Featured title</h3>
@@ -385,9 +432,11 @@
         </a>
       </div>
     </div>
+
+    
     <div class="col d-flex align-items-start">
       <div class="icon-square text-body-emphasis bg-body-secondary d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
-        <svg class="bi" width="1em" height="1em"><use xlink:href="#cpu-fill"/></svg>
+        <img src="instagram.png" alt="Ícone Personalizado" width="48" height="48">
       </div>
       <div>
         <h3 class="fs-2 text-body-emphasis">Featured title</h3>
@@ -397,9 +446,11 @@
         </a>
       </div>
     </div>
+
+
     <div class="col d-flex align-items-start">
       <div class="icon-square text-body-emphasis bg-body-secondary d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
-        <svg class="bi" width="1em" height="1em"><use xlink:href="#tools"/></svg>
+        <img src="face.png" alt="Ícone Personalizado" width="52" height="52">
       </div>
       <div>
         <h3 class="fs-2 text-body-emphasis">Featured title</h3>
@@ -412,7 +463,121 @@
   </div>
 </div>
 
+
+
 <div class="b-example-divider"></div>
+
+
+<div class=" row mt-5 ">
+  <div class="col text-center">
+    <!-- <h1>Saiba mais sobre:</h1> -->
+  </div>
+</div>
+
+<div class="row  mt-3">
+  <div class="col-12 col-sm-6 col-lg-4 text-center">
+    <a href="cat_cardapio.html"><img style="height: 350px; width: 300px;"
+        src="agende_h2.jpg" alt="Imagem link, para o cardapio do ocean foods"
+        class="media-object  img-responsive img-thumbnail"></a>
+    <h4>Agende pelo whatsapp</h4>
+  </div>
+  <div class="col-12 col-sm-6 col-lg-4 text-center">
+    <a
+      href="https://www.bing.com/maps?osid=988f2a8e-68cb-4022-9895-701513ff1d53&cp=-5.85446~-35.205677&lvl=16&imgid=083aee54-b525-4c4f-99ff-0b1497785c38&v=2&sV=2&form=S00027"><img
+        style="height: 350px; width: 300px;" src="agende_h.jpg"
+        alt="Imagem que direciona a localização google do ocean foods"
+        class="media-object  img-responsive img-thumbnail"></a>
+    <h4>Agenda e serviços online</h4>
+  </div>
+  <div class="col-12 col-sm-6 col-lg-4  text-center">
+    <a href="#"><img style="height: 350px; width: 300px;" src="localizacao.png"
+        alt="Imagem teste do ocean foods" class="media-object  img-responsive img-thumbnail"></a>
+    <h3>Localização</h3>
+  </div>
+</div>
+</div>
+
+<div class="b-example-divider"></div>
+
+<div class="container espacom">
+<div class=" row mt-4 espaco">
+  <h1>Nosso ambiente</h1>
+  <p class="justifi">Contamos com um ambiente agradavel e climatizado, com uma rigoroso controle higienico e
+    uma espeção de qualidade mantida diariamente.
+    Temos uma gastronomia rica em "sensações inesplicaveis" e bebidas quentes e gelados para todos os
+    publicos, um local onde femilias e amigos
+    podem se reunir e se confraternizar com todo conforto e segurança que merecem.
+  </p>
+  <br>
+  <iframe width="853" height="480" src="https://www.youtube.com/embed/QfdF0f9i0Gg?si=fOBNhUYp7Ri48p1o" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</div>
+</div>
+
+
+<div class="container px-4 py-5" id="icon-grid">
+  <h2 class="pb-2 border-bottom">Principais serviços</h2>
+
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 py-5">
+    <div class="col d-flex align-items-start">
+      <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#bootstrap"/></svg>
+      <div>
+        <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">Featured title</h3>
+        <p>Paragraph of text beneath the heading to explain the heading.</p>
+      </div>
+    </div>
+    <div class="col d-flex align-items-start">
+      <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#cpu-fill"/></svg>
+      <div>
+        <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">Featured title</h3>
+        <p>Paragraph of text beneath the heading to explain the heading.</p>
+      </div>
+    </div>
+    <div class="col d-flex align-items-start">
+      <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#calendar3"/></svg>
+      <div>
+        <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">Featured title</h3>
+        <p>Paragraph of text beneath the heading to explain the heading.</p>
+      </div>
+    </div>
+    <div class="col d-flex align-items-start">
+      <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#home"/></svg>
+      <div>
+        <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">Featured title</h3>
+        <p>Paragraph of text beneath the heading to explain the heading.</p>
+      </div>
+    </div>
+    <div class="col d-flex align-items-start">
+      <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#speedometer2"/></svg>
+      <div>
+        <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">Featured title</h3>
+        <p>Paragraph of text beneath the heading to explain the heading.</p>
+      </div>
+    </div>
+    <div class="col d-flex align-items-start">
+      <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#toggles2"/></svg>
+      <div>
+        <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">Featured title</h3>
+        <p>Paragraph of text beneath the heading to explain the heading.</p>
+      </div>
+    </div>
+    <div class="col d-flex align-items-start">
+      <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#geo-fill"/></svg>
+      <div>
+        <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">Featured title</h3>
+        <p>Paragraph of text beneath the heading to explain the heading.</p>
+      </div>
+    </div>
+    <div class="col d-flex align-items-start">
+      <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#tools"/></svg>
+      <div>
+        <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">Featured title</h3>
+        <p>Paragraph of text beneath the heading to explain the heading.</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="b-example-divider"></div>
+
   </main>
 
   <footer class="container py-5">
